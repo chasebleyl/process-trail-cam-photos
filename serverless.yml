@@ -1,6 +1,5 @@
 service: process-trail-cam
 
-
 provider:
   name: aws
   runtime: nodejs6.10
