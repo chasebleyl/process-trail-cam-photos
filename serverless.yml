@@ -1,0 +1,20 @@
+service: process-trail-cam
+
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+  role: arn:aws:iam::317910044022:role/LambdaS3TrailCamPermissions
+  environment:
+    stage: ${self:provider.stage}
+custom:
+  bucket: trail-cam-uploads-${self:provider.stage}
+functions:
+  process:
+    handler: handler.process
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
