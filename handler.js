@@ -18,9 +18,10 @@ module.exports.process = (event, context, callback) => {
 		});
 		
 		Promise.all([labelPromise, textPromise]).then((values) => {
-			const labels = {labels: values[0]}
-			const text = {text: values[1]}
-			console.log("All promises have finished.", labels, text);	
+			const labels = values[0];
+			const text = values[1];
+			console.log("All promises have finished.");
+			console.log(JSON.stringify(text));
 		});
 	});
 	
