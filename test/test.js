@@ -8,6 +8,38 @@ describe('Text Response Extraction', () => {
 			assert.equal(responseExtractor.processResponse(responseOne), "41'F O 0910812017 05 44AM CAMERA1");
 		});
 		
+		it("Should be valid temperature", () => {
+			assert.equal(responseExtractor.isTemperature("41'F"), true);
+		});
+		
+		it("Should be valid temperature", () => {
+			assert.equal(responseExtractor.isTemperature("23'F"), true);	
+		});
+		
+		it("Should be valid temperature", () => {
+			assert.equal(responseExtractor.isTemperature("-23'F"), true);	
+		});
+		
+		it("Should not be valid temperature", () => {
+			assert.equal(responseExtractor.isTemperature("D"), false);
+		});
+		
+		it("Should not be valid temperature", () => {
+			assert.equal(responseExtractor.isTemperature("|"), false);
+		});
+		
+		it("Should not be valid temperature", () => {
+			assert.equal(responseExtractor.isTemperature("0910812F17"), false);
+		});
+		
+		it("Should be a number", () => {
+			assert.equal(responseExtractor.isNumeric("23"), true);	
+		});
+		
+		it("Should not be a number", () => {
+			assert.equal(responseExtractor.isNumeric("a23"), false);	
+		});
+		
 		it('String should be less than 25', () => {
 		    assert.equal(responseExtractor.stringGreaterThan25('1'), false);
 		});
