@@ -1,6 +1,8 @@
 'use strict';
 
 const ImageProcessor = require('./process.js');
+const DynamoUtil = require('./dynamodb.js');
+const ResponseExtractor = require('./response.js');
 
 module.exports.process = (event, context, callback) => {
 	event.Records.forEach((record) => {
@@ -20,7 +22,10 @@ module.exports.process = (event, context, callback) => {
 		Promise.all([labelPromise, textPromise]).then((values) => {
 			const labels = values[0];
 			const text = values[1];
-			console.log("All promises have finished.");
+			let data = ResponseExtractor.processResponse(text);
+			data.labels = labels;
+			const response = DynamoUtil.write('TrailCamDataDev', data);
+			console.log("All promises have finished.", response);
 		});
 	});
 	
