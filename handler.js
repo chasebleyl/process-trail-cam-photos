@@ -23,9 +23,10 @@ module.exports.process = (event, context, callback) => {
 			const labels = values[0];
 			const text = values[1];
 			let data = ResponseExtractor.processResponse(text);
+			data.imageName = record.s3.object.key;
 			data.labels = labels;
-			const response = DynamoUtil.write('TrailCamDataDev', data);
-			console.log("All promises have finished.", response);
+			const response = DynamoUtil.write(data);
+			console.log("All promises have finished.");
 		});
 	});
 	

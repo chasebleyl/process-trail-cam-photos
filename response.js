@@ -31,6 +31,9 @@ class Extractor {
 				}
 			}
 		});
+		if (!this.data.time) {
+			this.data.time = null;
+		}
 		return this.data;
 	}
 

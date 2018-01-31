@@ -8,7 +8,7 @@ provider:
   role: arn:aws:iam::317910044022:role/LambdaS3TrailCamPermissions
   environment:
     stage: ${self:provider.stage}
-    table: TrailCamData${self:provider.stage}
+    table: TrailCamData-${self:provider.stage}
 custom:
   bucket: trail-cam-uploads-${self:provider.stage}
 functions:
