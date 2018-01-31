@@ -3,7 +3,7 @@ service: process-trail-cam
 provider:
   name: aws
   runtime: nodejs6.10
-  stage: dev
+  stage: prod
   region: us-east-1
   role: arn:aws:iam::317910044022:role/LambdaS3TrailCamPermissions
   environment:
